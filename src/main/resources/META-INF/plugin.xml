@@ -14,12 +14,11 @@
          Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
     <description><![CDATA[
-    中文介绍：
-    本插件主要功能是将书签信息中的描述内容显示到对应源码的行后面，直接展示和阅读。
-    <br>
-    Introduce :
+    Introduce : <br>
     The main function of this plug-in is to display the description content in the bookmark information to the corresponding source line behind.
-
+    <br>
+    中文介绍：<br>
+    本插件主要功能是将书签信息中的描述内容显示到对应源码的行后面，直接展示和阅读。
   ]]></description>
 
     <!-- Product and plugin compatibility requirements.

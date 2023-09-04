@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.yongtay"
-version = "1.0"
+version = "1.1.2"
 
 repositories {
     mavenCentral()
@@ -15,7 +15,7 @@ repositories {
 // Read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
 intellij {
     version.set("2023.2")
-    type.set("IU") // Target IDE Platform
+    type.set("IC") // Target IDE Platform
 
     plugins.set(listOf("java"/* Plugin Dependencies */))
 }
@@ -28,7 +28,7 @@ tasks {
     }
 
     patchPluginXml {
-        sinceBuild.set("201")
+        sinceBuild.set("221")
         untilBuild.set("232.*")
     }
 
