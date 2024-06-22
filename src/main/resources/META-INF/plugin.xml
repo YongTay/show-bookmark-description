@@ -29,5 +29,9 @@
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
         <editor.linePainter implementation="com.yongtay.ShowBookmarkProvider"/>
+        <applicationConfigurable
+                instance="com.yongtay.Settings"
+                dynamic="true"
+        />
     </extensions>
 </idea-plugin>
