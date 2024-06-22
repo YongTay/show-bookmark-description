@@ -14,34 +14,26 @@ import javax.swing.*;
 public class Settings implements Configurable {
 
     SettingPanel settings = new SettingPanel();
+    SettingStore store = SettingStore.settingStore;
 
     @Override
     public @Nullable JComponent createComponent() {
-        MyStoreService.State store = MyStoreService.settings();
-        SettingStore.enable = store.enable;
-        SettingStore.startComment = store.startComment;
-        SettingStore.fontColor = store.fontColor;
         return settings;
     }
 
     @Override
     public boolean isModified() {
-        return !SettingStore.getStartComment().equals(settings.getStartText())
-                || !SettingStore.getFontColor().equals(settings.getFontColor())
-                || !SettingStore.getEnabled().equals(settings.getEnable());
+        return store.isModify(settings);
     }
 
     @Override
     public void apply() throws ConfigurationException {
-        SettingStore.startComment = settings.getStartText();
-        SettingStore.fontColor = settings.getFontColor();
-        SettingStore.enable = settings.getEnable();
+        store.setStartComment(settings.getStartComment());
+        store.setEnable(settings.getEnable());
+        store.setFontColor(settings.getFontColor());
 
         ApplicationManager.getApplication().invokeLater(() -> {
-            MyStoreService.State store = MyStoreService.settings();
-            store.enable = settings.getEnable();
-            MyStoreService.setFontColor(settings.getFontColor());
-            store.startComment = settings.getStartText();
+            MyStoreService.store(store);
         });
     }
 

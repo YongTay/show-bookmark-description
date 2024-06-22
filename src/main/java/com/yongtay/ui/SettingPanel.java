@@ -12,16 +12,18 @@ public class SettingPanel extends JPanel {
     private ColorPanel colorPanel;
     private JCheckBox enableBtn;
 
+    SettingStore store = SettingStore.settingStore;
+
     public SettingPanel() {
         this.init();
     }
 
     public void init() {
-        int h  = 30;
+        int h = 30;
         int w = 120;
         this.setLayout(null);
         startText = new JTextField();
-        startText.setText(SettingStore.getStartComment());
+        startText.setText(store.getStartComment());
 
         JLabel startTextLabel = new JLabel("设置注释开始标识");
 
@@ -34,7 +36,7 @@ public class SettingPanel extends JPanel {
 
         colorPanel = new ColorPanel();
         colorPanel.setEditable(true);
-        colorPanel.setSelectedColor(SettingStore.getFontColor());
+        colorPanel.setSelectedColor(store.getFontColor());
 
         colorLabel.setBounds(0, h, w, h);
         colorPanel.setBounds(colorLabel.getWidth(), h, 100, h);
@@ -42,26 +44,26 @@ public class SettingPanel extends JPanel {
         this.add(colorPanel);
 
         JLabel enableLabel = new JLabel("是否显示书签描述");
-        enableLabel.setBounds(0, 2*h, w, h);
-        enableBtn = new JCheckBox();
-        enableBtn.setSelected(true);
-        enableBtn.setBounds(enableLabel.getWidth(), 2*h, 100, h);
-        this.add(enableLabel);
+        // enableLabel.setBounds(0, 2 * h, w, h);
+        enableBtn = new JCheckBox(enableLabel.getText());
+        enableBtn.setSelected(store.getEnable());
+        enableBtn.setBounds(0, 2 * h, 200, h);
+        // this.add(enableLabel);
         this.add(enableBtn);
     }
 
     public void reset() {
-        resetFontColor();
-        resetStartText();
         resetEnable();
+        resetStartComment();
+        resetFontColor();
     }
 
-    public String getStartText() {
+    public String getStartComment() {
         return startText.getText();
     }
 
-    public void resetStartText() {
-        startText.setText(SettingStore.getStartComment());
+    public void resetStartComment() {
+        startText.setText(store.getStartComment());
     }
 
     public Color getFontColor() {
@@ -69,7 +71,7 @@ public class SettingPanel extends JPanel {
     }
 
     public void resetFontColor() {
-        colorPanel.setSelectedColor(SettingStore.getFontColor());
+        colorPanel.setSelectedColor(store.getFontColor());
     }
 
     public Boolean getEnable() {
@@ -77,6 +79,6 @@ public class SettingPanel extends JPanel {
     }
 
     public void resetEnable() {
-        enableBtn.setSelected(SettingStore.getEnabled());
+        enableBtn.setSelected(store.getEnable());
     }
 }

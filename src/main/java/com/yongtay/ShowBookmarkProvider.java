@@ -7,7 +7,6 @@ import com.intellij.openapi.editor.EditorLinePainter;
 import com.intellij.openapi.editor.LineExtensionInfo;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.ui.JBColor;
 import com.yongtay.store.SettingStore;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -18,9 +17,11 @@ import java.util.Collections;
 import java.util.List;
 
 public class ShowBookmarkProvider extends EditorLinePainter {
+
     @Override
     public @Nullable Collection<LineExtensionInfo> getLineExtensions(@NotNull Project project, @NotNull VirtualFile file, int lineNumber) {
-        if (!SettingStore.getEnabled()) {
+        SettingStore store = SettingStore.settingStore;
+        if (!store.getEnable()) {
             return null;
         }
         BookmarksManager bm = BookmarksManager.getInstance(project);
@@ -33,7 +34,7 @@ public class ShowBookmarkProvider extends EditorLinePainter {
                 for (BookmarkGroup g : groups) {
                     String description = g.getDescription(b);
                     if(null != description && !description.isBlank()) {
-                        return Collections.singleton(new LineExtensionInfo((" " + SettingStore.getStartComment() + " ").concat(description), SettingStore.getFontColor(), null, null, Font.ITALIC));
+                        return Collections.singleton(new LineExtensionInfo((" " + store.getStartComment() + " ").concat(description), store.getFontColor(), null, null, Font.ITALIC));
                     }
                 }
             }
