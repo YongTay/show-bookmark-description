@@ -1,6 +1,8 @@
 package com.yongtay.ui;
 
 import com.intellij.ui.ColorPanel;
+import com.intellij.ui.components.panels.HorizontalLayout;
+import com.intellij.ui.components.panels.VerticalLayout;
 import com.yongtay.store.SettingStore;
 
 import javax.swing.*;
@@ -19,37 +21,36 @@ public class SettingPanel extends JPanel {
     }
 
     public void init() {
-        int h = 30;
-        int w = 120;
-        this.setLayout(null);
+        this.setLayout(new VerticalLayout(5));
+
+        JLabel enableLabel = new JLabel("是否显示书签描述");
+        enableBtn = new JCheckBox(enableLabel.getText());
+        enableBtn.setSelected(store.getEnable());
+        this.add(enableBtn);
+
         startText = new JTextField();
         startText.setText(store.getStartComment());
-
+        int h = 30;
+        int labelWidth = 150;
         JLabel startTextLabel = new JLabel("设置注释开始标识");
+        startTextLabel.setPreferredSize(new Dimension(labelWidth, h));
+        startText.setPreferredSize(new Dimension(100, h));
+        JPanel row1 = new JPanel(new HorizontalLayout(5));
+        row1.add(startTextLabel);
+        row1.add(startText);
+        this.add(row1);
 
-        startTextLabel.setBounds(0, 0, w, h);
-        startText.setBounds(startTextLabel.getWidth(), 0, 100, h);
-        this.add(startTextLabel);
-        this.add(startText);
-
+        JPanel row2 = new JPanel(new HorizontalLayout(5));
         JLabel colorLabel = new JLabel("设置文字颜色");
-
         colorPanel = new ColorPanel();
         colorPanel.setEditable(true);
         colorPanel.setSelectedColor(store.getFontColor());
+        colorLabel.setPreferredSize(new Dimension(labelWidth, h));
+        colorPanel.setPreferredSize(new Dimension(100, h));
+        row2.add(colorLabel);
+        row2.add(colorPanel);
+        this.add(row2);
 
-        colorLabel.setBounds(0, h, w, h);
-        colorPanel.setBounds(colorLabel.getWidth(), h, 100, h);
-        this.add(colorLabel);
-        this.add(colorPanel);
-
-        JLabel enableLabel = new JLabel("是否显示书签描述");
-        // enableLabel.setBounds(0, 2 * h, w, h);
-        enableBtn = new JCheckBox(enableLabel.getText());
-        enableBtn.setSelected(store.getEnable());
-        enableBtn.setBounds(0, 2 * h, 200, h);
-        // this.add(enableLabel);
-        this.add(enableBtn);
     }
 
     public void reset() {
