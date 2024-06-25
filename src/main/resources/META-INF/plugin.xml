@@ -33,5 +33,6 @@
                 instance="com.yongtay.Settings"
                 dynamic="true"
         />
+        <toolWindow factoryClass="com.yongtay.ui.ToolWindowPanel" id="Bookmark's Descriptor" canCloseContents="false" anchor="bottom" />
     </extensions>
 </idea-plugin>
